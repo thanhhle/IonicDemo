@@ -1,0 +1,40 @@
+<ion-content padding>
+  <ion-label class="TitleLabel">Welcome</ion-label>
+  <ion-label class="DescriptionLabel">Sign in to continue</ion-label>
+
+  <form>
+    <ion-item>
+      <ion-input type="email" placeHolder="Email" [(ngModel)]='email' name="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeHolder="Password" [(ngModel)]='password' name="password" required></ion-input>
+    </ion-item>
+  </form>
+
+  <ion-button class="ForgotPasswordButton" fill="clear" (click)="navigateToForgotPasswordPage()">Forgot Password?</ion-button>
+
+  <ion-button class="SignInButton" expand="block" shape="round" fill="solid" (click)="signIn()">Sign In</ion-button>
+
+  <ion-label class="OrConnectingUsingLabel">--- Or connect using ---</ion-label>
+
+  <div class="ion-text-center">
+    <ion-button class="GoogleIconButton" shape="round" (click)="signInWithGoogle()">
+      <ion-icon slot="icon-only" name="logo-google"></ion-icon>
+    </ion-button>
+  
+    <ion-button class="FacebookIconButton" shape="round" (click)="signInWithFacebook()">
+      <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="ion-text-center">
+      <ion-label class="NewUserLabel">I'm a new user</ion-label>
+      <ion-button class="SignUpButton" fill="clear" (click)="navigateToSignUpPage()">Sign Up</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

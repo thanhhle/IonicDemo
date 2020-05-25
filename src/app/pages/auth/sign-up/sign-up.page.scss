@@ -1,0 +1,53 @@
+ion-label {
+    display: block;
+}
+
+.TitleLabel {
+    margin: 45px 25px 5px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.DescriptionLabel {
+    margin: 5px 25px 40px;
+    font-size: 13px;
+    opacity: 50%;
+    font-weight: 450;  
+}
+
+ion-item {
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin: 20px 25px 0px;
+    font-size: 13px;
+    height: 45px;
+}
+
+ion-button {
+    text-transform: none;
+    font-weight: 400;
+    --background-hover: transparent;
+}
+
+.SignUpButton {
+    margin: 55px 25px 0px;
+    height: 40px;
+    font-size: 15px;
+}
+
+ion-toolbar {
+    height: 50px;
+}
+
+.AlreadyMemberLabel {
+    font-size: 12px;
+    padding-top: 12px;
+    display: inline-block;
+}
+
+.SignInButton {
+    margin-top: -4px;
+    font-size: 12px;
+    --border-radius: 50px;
+    height: 35px;
+}

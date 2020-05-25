@@ -1,0 +1,33 @@
+<ion-content padding>
+  <ion-label class="TitleLabel">Sign Up</ion-label>
+  <ion-label class="DescriptionLabel">Create an account to get started</ion-label>
+
+  <form>
+    <ion-item>
+      <ion-input type="text" placeHolder="First Name" [(ngModel)]="firstName" name="firstName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" placeHolder="Last Name" [(ngModel)]="lastName" name="lastName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="email" placeHolder="Email" [(ngModel)]="email" name="email" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" placeHolder="Password" [(ngModel)]="password" name="password" required></ion-input>
+    </ion-item>
+  </form>
+
+  <ion-button class="SignUpButton" expand="block" shape="round" fill="solid" (click)="signUp()">Sign Up</ion-button>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="ion-text-center">
+      <ion-label class="AlreadyMemberLabel">I'm already a member</ion-label>
+      <ion-button class="SignInButton" fill="clear" (click)="navigateToSignInPage()">Sign In</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

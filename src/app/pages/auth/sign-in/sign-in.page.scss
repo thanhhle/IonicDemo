@@ -1,0 +1,87 @@
+ion-label {
+    display: block;
+}
+
+.TitleLabel {
+    margin: 45px 25px 5px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.DescriptionLabel {
+    margin: 5px 25px 40px;
+    font-size: 13px;
+    opacity: 50%;
+    font-weight: 450;  
+}
+
+ion-item {
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin: 20px 25px 0px;
+    font-size: 13px;
+    height: 45px;
+}
+
+ion-button {
+    text-transform: none;
+    font-weight: 400;
+    --background-hover: transparent;
+}
+
+.ForgotPasswordButton {
+    float: right;
+    margin: 5px 15px 0px;
+    font-size: 10px;
+    color: grey;
+    height: 25px;
+}
+
+.SignInButton {
+    margin: 55px 25px 0px;
+    height: 40px;
+    font-size: 15px;
+}
+
+.OrConnectingUsingLabel {
+    text-align: center;
+    font-size: 12px;
+    opacity: 70%;
+    margin-top: 25px;
+}
+
+ion-icon {
+    font-size: 25px !important;
+    margin: -30px;
+}
+
+.GoogleIconButton {
+    width: 55px;
+    height: 55px;
+    margin: 15px 15px 0px;
+    --background: #DB4437;
+}
+
+.FacebookIconButton {
+    width: 55px;
+    height: 55px;
+    margin: 15px 15px 0px;
+    --background: #4267B2;
+}
+
+ion-toolbar {
+    height: 50px;
+}
+
+.NewUserLabel {
+    font-size: 12px;
+    padding-top: 12px;
+    display: inline-block;
+}
+
+.SignUpButton {
+    margin-top: -4px;
+    font-size: 12px;
+    --border-radius: 50px;
+    height: 35px;
+}
