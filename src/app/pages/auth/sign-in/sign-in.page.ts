@@ -39,7 +39,7 @@ export class SignInPage implements OnInit {
         },
         async err => {
           const alert = await this.alertController.create({
-            header: 'Log in failed!',
+            header: 'Sign in failed!',
             message: err.message,
             buttons: ['Try again']
           })
@@ -57,7 +57,7 @@ export class SignInPage implements OnInit {
         },
         async err => {
           const alert = await this.alertController.create({
-            header: 'Log in failed!',
+            header: 'Sign in failed!',
             message: err.message,
             buttons: ['Try again']
           })
@@ -75,7 +75,7 @@ export class SignInPage implements OnInit {
         },
         async err => {
           const alert = await this.alertController.create({
-            header: 'Log in failed!',
+            header: 'Sign in failed!',
             message: err.message,
             buttons: ['Try again']
           })
@@ -95,6 +95,6 @@ export class SignInPage implements OnInit {
 
   navigateToHomePage() {
     this.router.navigate(['home'])
-  }s
+  }
 
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { User } from '../models/user.interface';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Platform } from '@ionic/angular';
 
 import * as firebase from 'firebase/app';
@@ -11,10 +12,12 @@ import 'firebase/firestore';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+
+export class AuthService
+{
   private platform: Platform;
 
-  constructor( private facebook: Facebook, platform: Platform) 
+  constructor( private facebook: Facebook, private googlePlus: GooglePlus, platform: Platform) 
   {
     this.platform = platform;
   }
@@ -53,7 +56,7 @@ export class AuthService {
         .then(
           res =>
           {
-            this.updateUserLastActive(res)
+            this.updateUserLastSignIn(res.user.uid)
             resolve(res)
           },
           err => reject(err)
@@ -87,14 +90,7 @@ export class AuthService {
               (
                 res =>
                 {
-                  if (this.userIsCreated(res.user.uid) === false)
-                  {
-                    this.createUserDB(res)
-                  }
-                  else
-                  {
-                    this.updateUserLastActive(res)
-                  }
+                  this.createUserDB(res)
                   resolve(res)
                 },
                 err => reject(err)
@@ -112,15 +108,9 @@ export class AuthService {
     {
       firebase.auth().signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(
-          res => {
-            if (this.userIsCreated(res.user.uid) === false)
-            {
-              this.createUserDB(res)
-            }
-            else
-            {
-              this.updateUserLastActive(res)
-            }
+          res =>
+          {
+            this.createUserDB(res)
             resolve(res)
           },
           err => reject(err)
@@ -128,26 +118,79 @@ export class AuthService {
     })
   }
 
+  
   signInWithGoogle()
   {
     if (this.platform.is('hybrid'))
     {
-      return this.nativeFacebookAuth()
+      return this.nativeGoogleAuth()
     }
     else
     {
-      return this.browserFacebookAuth()
+      return this.browserGoogleAuth()
     }
   }
 
-  signOutUser()
+  nativeGoogleAuth()
   {
     return new Promise<any>((resolve, reject) =>
     {
+      this.googlePlus.login({
+          'webClientId': '114715601545-r5gjjhq5iu6cv2vhm4k7pmds6gefjh64.apps.googleusercontent.com',
+          'offline': true
+        })
+        .then(
+          res => 
+          {
+            firebase.auth.GoogleAuthProvider.credential()
+            const googleCredential = firebase.auth.GoogleAuthProvider.credential(res.idToken)
+            firebase.auth().signInWithCredential(googleCredential)
+              .then
+              (
+                res =>
+                {
+                  this.createUserDB(res)
+                  resolve(res)
+                },
+                err => reject(err)
+              )
+            resolve(res)
+          },
+          err => reject(err)
+      )
+    })
+  }
+
+  browserGoogleAuth()
+  {
+    return new Promise<any>((resolve, reject) =>
+    {
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+        .then(
+          res =>
+          {
+            this.createUserDB(res)
+            resolve(res)
+          },
+          err => reject(err)
+        )
+    })
+  }
+  
+
+  signOut()
+  {
+    return new Promise<any>((resolve, reject) =>
+    {
+      const uid = firebase.auth().currentUser.uid
       firebase.auth().signOut()
         .then
         (
-          res => resolve(res),
+          res =>
+          {
+            this.updateUserLastActive(uid)
+            resolve(res)
+          },
           err => reject(err)
         )
     })
@@ -171,40 +214,51 @@ export class AuthService {
 
   createUserDB(res: firebase.auth.UserCredential)
   {
-    let user: User =
-      {
-        uid: res.user.uid,
-        email: res.user.email,
-        firstName: res.user.displayName.split(' ')[0],
-        lastName: res.user.displayName.split(' ')[1],
-        createdDate: new Date(),
-        lastActive: new Date()
-      }
-      
-    firebase.firestore().collection('users').doc(res.user.uid).set(user)
+    firebase.firestore().collection('users').doc(res.user.uid).get()
+      .then
+      (
+        (docSnapshot) => 
+        {
+          // If user data is already stored in the database
+          if (docSnapshot.exists)
+          {
+            this.updateUserLastSignIn(res.user.uid)
+          }
+          else
+          {
+            let user: User =
+            {
+              uid: res.user.uid,
+              email: res.user.email,
+              firstName: res.user.displayName.split(' ')[0],
+              lastName: res.user.displayName.split(' ')[1],
+              createdDate: new Date(),
+              lastSignIn: new Date(),
+              lastActive: new Date()
+            }
+        
+            firebase.firestore().collection('users').doc(res.user.uid).set(user)
+          }
+        }
+      )
   }
 
-
-  updateUserLastActive(res: firebase.auth.UserCredential)
+  updateUserLastSignIn(uid: string)
   {
-    firebase.firestore().collection('users').doc(res.user.uid).set
+    firebase.firestore().collection('users').doc(uid).set
+      ( 
+        { lastSignIn: new Date() },
+        { merge: true } 
+      )
+  }
+
+  updateUserLastActive(uid: string)
+  {
+    firebase.firestore().collection('users').doc(uid).set
       ( 
         { lastActive: new Date() },
         { merge: true } 
       )
   }
 
-  userIsCreated(uid: string): boolean
-  {
-    var isCreated: boolean
-    firebase.firestore().collection('users').doc(uid).get()
-      .then
-      (
-        (docSnapshot) => { isCreated = docSnapshot.exists }
-      )
-
-    console.log('User Exists')  
-
-    return isCreated
-  }
 }
