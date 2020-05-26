@@ -1,8 +1,8 @@
 {
   "name": "IonicDemo",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Thanh Le",
+  "homepage": "https://github.com/thanhhle",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
