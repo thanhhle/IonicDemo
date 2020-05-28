@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Manage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+      <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="full" detail="true" [class.selected]="selectedIndex == i">
+        <ion-icon slot="start" [name]="p.icon"></ion-icon>
+        <ion-label>{{ p.title }}</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+
+    <ion-item button (click)="signOut()" detail="false" lines="full">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      <ion-label>Sign Out</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

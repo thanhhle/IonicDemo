@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SidemenuPageRoutingModule } from './sidemenu-routing.module';
+import { MenuPageRoutingModule } from './menu-routing.module';
 
-import { SidemenuPage } from './sidemenu.page';
+import { MenuPage } from './menu.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SidemenuPageRoutingModule
+    MenuPageRoutingModule
   ],
-  declarations: [SidemenuPage]
+  declarations: [MenuPage]
 })
-export class SidemenuPageModule {}
+export class MenuPageModule {}

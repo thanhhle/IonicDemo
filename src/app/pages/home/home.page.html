@@ -1,22 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Home
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="products">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-label>Products</ion-label>
+    </ion-tab-button>
 
-  <div class='SignOutButton'>
-    <ion-button (click)="signOut()">
-      <ion-icon slot="start" name="log-out-outline"></ion-icon>
-      <ion-label>Sign Out</ion-label>
-    </ion-button>
-  </div>
-</ion-content>
+    <ion-tab-button tab="beauty-tips">
+      <ion-icon name="bulb-outline"></ion-icon>
+      <ion-label>Beauty Tips</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="menu">
+      <ion-icon name="menu-outline"></ion-icon>
+      <ion-label>More</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>
