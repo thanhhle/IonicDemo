@@ -9,15 +9,15 @@ const routes: Routes = [
   },
   {
     path: 'sign-in',
-    loadChildren: () => import('./pages/auth/sign-in/sign-in.module').then( m => m.SignInPageModule)
+    loadChildren: () => import('./pages/authentication/sign-in/sign-in.module').then( m => m.SignInPageModule)
   },
   {
     path: 'sign-up',
-    loadChildren: () => import('./pages/auth/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+    loadChildren: () => import('./pages/authentication/sign-up/sign-up.module').then( m => m.SignUpPageModule)
   },
   {
     path: 'forgot-password',
-    loadChildren: () => import('./pages/auth/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    loadChildren: () => import('./pages/authentication/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
   {
     path: '',

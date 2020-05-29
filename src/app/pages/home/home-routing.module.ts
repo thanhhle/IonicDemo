@@ -15,7 +15,7 @@ const routes: Routes = [
         [
           {
             path: '',
-            loadChildren: () => import('../products/products.module').then(m => m.ProductsPageModule)
+            loadChildren: () => import('../products-tab/products/products.module').then(m => m.ProductsPageModule)
           }
         ]
       },
@@ -25,11 +25,11 @@ const routes: Routes = [
         [
           {
             path: '',
-            loadChildren: () => import('../beauty-tips/beauty-tips.module').then(m => m.BeautyTipsPageModule),
+            loadChildren: () => import('../beauty-tips-tab/beauty-tips/beauty-tips.module').then(m => m.BeautyTipsPageModule),
           },
           {
             path: 'create-tip',
-            loadChildren: () => import('../create-tip/create-tip.module').then( m => m.CreateTipPageModule)
+            loadChildren: () => import('../beauty-tips-tab/create-tip/create-tip.module').then( m => m.CreateTipPageModule)
           },
         ]
       },
