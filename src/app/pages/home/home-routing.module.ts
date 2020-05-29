@@ -6,7 +6,8 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomePage,
-    children: [
+    children:
+    [
       {
         path: 'products',
         loadChildren: () => import('../products/products.module').then(m => m.ProductsPageModule)
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'menu',
         loadChildren: () => import('../menu/menu.module').then(m => m.MenuPageModule)
+      },
+      {
+        path: 'beauty-tips/create-post',
+        loadChildren: () => import('../create-post/create-post.module').then( m => m.CreatePostPageModule)
       },
       {
         path: '',

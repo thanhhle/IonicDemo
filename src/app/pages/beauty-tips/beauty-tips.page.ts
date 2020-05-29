@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-beauty-tips',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BeautyTipsPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  navigateToCreatePostPage()
+  {
+    this.router.navigate(['home/beauty-tips/create-post'])
+  }
 }
