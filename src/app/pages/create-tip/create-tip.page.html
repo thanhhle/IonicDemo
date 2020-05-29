@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>New Tip</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="post()">Post</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item class="InputField">
+    <ion-input [(ngModel)]="title" name="title" placeholder="Title"></ion-input>
+  </ion-item>   
+
+  <ion-item class="InputField">
+    <ion-textarea [(ngModel)]="description" name="description" rows="10" maxLength="250" placeholder="Description"></ion-textarea>
+  </ion-item>
+</ion-content>

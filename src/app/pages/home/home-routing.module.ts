@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePage } from './home.page';
 
+
 const routes: Routes = [
   {
     path: 'home',
@@ -10,19 +11,56 @@ const routes: Routes = [
     [
       {
         path: 'products',
-        loadChildren: () => import('../products/products.module').then(m => m.ProductsPageModule)
+        children:
+        [
+          {
+            path: '',
+            loadChildren: () => import('../products/products.module').then(m => m.ProductsPageModule)
+          }
+        ]
       },
       {
         path: 'beauty-tips',
-        loadChildren: () => import('../beauty-tips/beauty-tips.module').then(m => m.BeautyTipsPageModule)
+        children:
+        [
+          {
+            path: '',
+            loadChildren: () => import('../beauty-tips/beauty-tips.module').then(m => m.BeautyTipsPageModule),
+          },
+          {
+            path: 'create-tip',
+            loadChildren: () => import('../create-tip/create-tip.module').then( m => m.CreateTipPageModule)
+          },
+        ]
       },
       {
         path: 'menu',
-        loadChildren: () => import('../menu/menu.module').then(m => m.MenuPageModule)
-      },
-      {
-        path: 'beauty-tips/create-post',
-        loadChildren: () => import('../create-post/create-post.module').then( m => m.CreatePostPageModule)
+        children:
+        [
+          {
+            path: '',
+            loadChildren: () => import('../menu/menu.module').then(m => m.MenuPageModule)
+          },
+          {
+            path: 'manage-account',
+            loadChildren: () => import('../manage-account/manage-account.module').then( m => m.ManageAccountPageModule)
+          },
+          {
+            path: 'manage-tips',
+            children:
+            [
+              {
+                path: '',
+                loadChildren: () => import('../manage-tips/manage-tips.module').then( m => m.ManageTipsPageModule)
+              },
+              {
+                path: 'edit-tip',
+                loadChildren: () => import('../edit-tip/edit-tip.module').then( m => m.EditTipPageModule)
+              },
+            ]
+            
+          },
+        ]
       },
       {
         path: '',

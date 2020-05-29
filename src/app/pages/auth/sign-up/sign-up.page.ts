@@ -10,8 +10,8 @@ import { AlertController } from '@ionic/angular';
 })
 export class SignUpPage implements OnInit {
 
-  email = '';
-  password = '';
+  email = ''
+  password = ''
   firstName = ''
   lastName = ''
 
