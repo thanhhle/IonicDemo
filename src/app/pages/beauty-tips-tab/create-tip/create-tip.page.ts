@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { BeautyTipDataService } from '../../../services/beauty-tip-data.service';
 
 @Component({
   selector: 'app-create-tip',
@@ -11,9 +12,15 @@ export class CreateTipPage implements OnInit {
   title = '';
   description = '';
 
-  constructor(private router: Router, private alertController: AlertController) { }
+  constructor(
+    private router: Router,
+    private beautyTipDataService: BeautyTipDataService,
+    private alertController: AlertController) { }
 
-  async post()
+  ngOnInit() {
+  }
+
+  async postTip()
   {
     if (this.title === '' || this.description === '') {
       const validFieldsAlert = await this.alertController.create({
@@ -24,12 +31,35 @@ export class CreateTipPage implements OnInit {
 
       return await validFieldsAlert.present()
     }
-    
-    this.router.navigate(['home/beauty-tips'])
-  }
 
-  ngOnInit() {
-  }
+    this.beautyTipDataService.createBeautyTip(this.title, this.description)
+      .then
+      (
+        async res => 
+        {
+          const alert = await this.alertController.create({
+            header: 'Tip posted sucessfully!',
+            buttons: [{
+              text: 'OK',
+              handler: () => {
+                this.router.navigate(['home/beauty-tips'])
+              }
+            }]
+          })
 
-  
+          await alert.present()
+        },
+
+        async err => 
+        {
+          const alert = await this.alertController.create({
+            header: 'Tip posted failed!',
+            message: err.message,
+            buttons: ['Try again']
+          })
+
+          await alert.present()
+        }
+      )
+  }
 }

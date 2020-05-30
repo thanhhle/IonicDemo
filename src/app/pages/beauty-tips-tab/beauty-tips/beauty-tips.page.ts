@@ -8,7 +8,10 @@ import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 })
 export class BeautyTipsPage implements OnInit {
 
-  constructor(
+  selectedIndex = 0
+
+  constructor
+  (
     private router: Router,
   )
   {

@@ -17,7 +17,7 @@ export class SignUpPage implements OnInit {
 
   constructor(
     private router: Router,
-    public authService: AuthService,
+    private authService: AuthService,
     private alertController: AlertController) { }
 
   ngOnInit() {
@@ -36,32 +36,33 @@ export class SignUpPage implements OnInit {
     }
 
     this.authService.signUp(this.email, this.password, this.firstName, this.lastName)
-    .then(
-      async res => {
-        const alert = await this.alertController.create({
-          header: 'Account created sucessfully!',
-          message: 'Please log in to continue.',
-          buttons: [{
-            text: 'Log In',
-            handler: () => {
-              this.navigateToSignInPage()
-            }
-          }]
-        })
+      .then
+      (
+        async res => {
+          const alert = await this.alertController.create({
+            header: 'Account created sucessfully!',
+            message: 'Please log in to continue.',
+            buttons: [{
+              text: 'Log In',
+              handler: () => {
+                this.navigateToSignInPage()
+              }
+            }]
+          })
 
-        await alert.present()
-      },
+          await alert.present()
+        },
 
-      async err => {
-        const alert = await this.alertController.create({
-          header: 'Account created failed!',
-          message: err.message,
-          buttons: ['OK']
-        })
+        async err => {
+          const alert = await this.alertController.create({
+            header: 'Account created failed!',
+            message: err.message,
+            buttons: ['OK']
+          })
 
-        await alert.present()
-      }
-    )
+          await alert.present()
+        }
+      )
   }
 
   navigateToSignInPage()

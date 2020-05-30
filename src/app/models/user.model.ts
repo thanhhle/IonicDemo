@@ -1,9 +1,10 @@
-export interface User {
+export class User {
     uid: string
     email: string
     firstName: string
     lastName: string
     createdDate: Date
-    lastSignIn: Date
-    lastActive: Date
+    lastSignInDate: Date
+    lastActiveDate: Date
+    beautyTipIDs: string[]
 }

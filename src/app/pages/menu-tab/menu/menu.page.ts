@@ -11,8 +11,8 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./menu.page.scss'],
 })
 export class MenuPage implements OnInit {
-  public selectedIndex = 0;
-  public appPages = [
+  selectedIndex = 0
+  menuPages = [
     {
       title: 'Your Account',
       url: 'manage-account',
@@ -27,7 +27,7 @@ export class MenuPage implements OnInit {
 
   constructor(
     private router: Router,
-    public authService: AuthService,
+    private authService: AuthService,
     private alertController: AlertController
   ) 
   {

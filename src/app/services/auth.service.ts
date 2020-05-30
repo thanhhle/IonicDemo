@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { User } from '../models/user.interface';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { GooglePlus } from '@ionic-native/google-plus/ngx';
 import { Platform } from '@ionic/angular';
 
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/firestore';
+
+import { UserDataService } from './user-data.service'
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,17 @@ import 'firebase/firestore';
 
 export class AuthService
 {
-  private platform: Platform;
+  platform: Platform
+  userDataService: UserDataService
 
-  constructor( private facebook: Facebook, private googlePlus: GooglePlus, platform: Platform) 
+  constructor(
+    private facebook: Facebook,
+    private googlePlus: GooglePlus,
+    platform: Platform,
+    userDataService: UserDataService) 
   {
-    this.platform = platform;
+    this.platform = platform
+    this.userDataService = userDataService
   }
 
   signUp(email: string, password: string, firstName: string, lastName: string)
@@ -32,11 +38,12 @@ export class AuthService
     return new Promise<any>((resolve, reject) =>
     {
       firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(
+        .then
+        (
           res =>
           {
             res.user.updateProfile({ displayName: firstName + ' ' + lastName })
-            this.createUserDB(res)
+            this.userDataService.createUser(res.user.uid, res.user.email, res.user.displayName)
             resolve(res)
           },
           err => reject(err)
@@ -53,10 +60,11 @@ export class AuthService
     return new Promise<any>((resolve, reject) =>
     {
       firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(
+        .then
+        (
           res =>
           {
-            this.updateUserLastSignIn(res.user.uid)
+            this.userDataService.updateUserLastSignIn(res.user.uid)
             resolve(res)
           },
           err => reject(err)
@@ -90,7 +98,7 @@ export class AuthService
               (
                 res =>
                 {
-                  this.createUserDB(res)
+                  this.userDataService.createUser(res.user.uid, res.user.email, res.user.displayName)
                   resolve(res)
                 },
                 err => reject(err)
@@ -110,7 +118,7 @@ export class AuthService
         .then(
           res =>
           {
-            this.createUserDB(res)
+            this.userDataService.createUser(res.user.uid, res.user.email, res.user.displayName)
             resolve(res)
           },
           err => reject(err)
@@ -149,7 +157,7 @@ export class AuthService
               (
                 res =>
                 {
-                  this.createUserDB(res)
+                  this.userDataService.createUser(res.user.uid, res.user.email, res.user.displayName)
                   resolve(res)
                 },
                 err => reject(err)
@@ -169,7 +177,7 @@ export class AuthService
         .then(
           res =>
           {
-            this.createUserDB(res)
+            this.userDataService.createUser(res.user.uid, res.user.email, res.user.displayName)
             resolve(res)
           },
           err => reject(err)
@@ -182,13 +190,13 @@ export class AuthService
   {
     return new Promise<any>((resolve, reject) =>
     {
-      const uid = firebase.auth().currentUser.uid
+      const uid = this.getCurrentUser()
       firebase.auth().signOut()
         .then
         (
           res =>
           {
-            this.updateUserLastActive(uid)
+            this.userDataService.updateUserLastActive(uid)
             resolve(res)
           },
           err => reject(err)
@@ -211,54 +219,8 @@ export class AuthService
     })
   }
 
-
-  createUserDB(res: firebase.auth.UserCredential)
+  getCurrentUser()
   {
-    firebase.firestore().collection('users').doc(res.user.uid).get()
-      .then
-      (
-        (docSnapshot) => 
-        {
-          // If user data is already stored in the database
-          if (docSnapshot.exists)
-          {
-            this.updateUserLastSignIn(res.user.uid)
-          }
-          else
-          {
-            let user: User =
-            {
-              uid: res.user.uid,
-              email: res.user.email,
-              firstName: res.user.displayName.split(' ')[0],
-              lastName: res.user.displayName.split(' ')[1],
-              createdDate: new Date(),
-              lastSignIn: new Date(),
-              lastActive: new Date()
-            }
-        
-            firebase.firestore().collection('users').doc(res.user.uid).set(user)
-          }
-        }
-      )
+    return firebase.auth().currentUser.uid
   }
-
-  updateUserLastSignIn(uid: string)
-  {
-    firebase.firestore().collection('users').doc(uid).set
-      ( 
-        { lastSignIn: new Date() },
-        { merge: true } 
-      )
-  }
-
-  updateUserLastActive(uid: string)
-  {
-    firebase.firestore().collection('users').doc(uid).set
-      ( 
-        { lastActive: new Date() },
-        { merge: true } 
-      )
-  }
-
 }
