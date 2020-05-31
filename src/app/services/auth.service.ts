@@ -64,7 +64,7 @@ export class AuthService
         (
           res =>
           {
-            this.userDataService.updateUserLastSignIn(res.user.uid)
+            this.userDataService.updateUserLastSignInDate(res.user.uid)
             resolve(res)
           },
           err => reject(err)
@@ -190,13 +190,13 @@ export class AuthService
   {
     return new Promise<any>((resolve, reject) =>
     {
-      const uid = this.getCurrentUser()
+      const uid = this.getCurrentUserID()
       firebase.auth().signOut()
         .then
         (
           res =>
           {
-            this.userDataService.updateUserLastActive(uid)
+            this.userDataService.updateUserLastActiveDate(uid)
             resolve(res)
           },
           err => reject(err)
@@ -219,8 +219,13 @@ export class AuthService
     })
   }
 
-  getCurrentUser()
+  getCurrentUserID()
   {
     return firebase.auth().currentUser.uid
+  }
+
+  getCurrentUserName()
+  {
+    return firebase.auth().currentUser.displayName
   }
 }

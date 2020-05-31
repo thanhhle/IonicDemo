@@ -13,12 +13,31 @@ import { UserDataService } from './user-data.service'
 export class BeautyTipDataService {
 
   authService: AuthService
-  userDataService: UserDataService;
+  userDataService: UserDataService
+  beautyTipConverter = 
+  {
+    toFirestore(beautyTip: BeautyTip): firebase.firestore.DocumentData
+    {
+      const tipDocumentData: firebase.firestore.DocumentData =
+      {
+        id: beautyTip.id,
+        author: beautyTip.author,
+        title: beautyTip.title,
+        description: beautyTip.description,
+        createdDate: beautyTip.createdDate,
+        lastUpdatedDate: beautyTip.lastUpdatedDate,
+      }
+      return tipDocumentData
+    },
 
+    fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): BeautyTip
+    {
+      const data = snapshot.data(options)!
+      return new BeautyTip(data.id, data.author, data.title, data.description, data.createdDate, data.lastUpdatedDate)
+    }
+  }
 
-  constructor(
-    authService: AuthService,
-    userDataService: UserDataService)
+  constructor(authService: AuthService, userDataService: UserDataService)
   { 
     this.authService = authService
     this.userDataService = userDataService
@@ -28,22 +47,17 @@ export class BeautyTipDataService {
   {
     return new Promise<any>((resolve, reject) => 
     {
-      let beautyTip: BeautyTip = 
-      {
-        id: this.authService.getCurrentUser() + new Date().getTime(),
-        author: this.authService.getCurrentUser(),
-        title: title,
-        description: description,
-        createdDate: new Date(),
-        lastEditDate: new Date()
-      }
+      let id = this.authService.getCurrentUserID() + new Date().getTime(),
+          author = this.authService.getCurrentUserName()
 
-      firebase.firestore().collection('beautyTips').doc(beautyTip.id).set(beautyTip)
+      const beautyTip = new BeautyTip(id, author, title, description)
+      
+      firebase.firestore().collection('beautyTips').withConverter(this.beautyTipConverter).doc(beautyTip.id).set(beautyTip)
         .then
         (
           res => 
           {
-            this.userDataService.addBeautyTipID(beautyTip.author, beautyTip.id)
+            this.userDataService.addBeautyTipID(this.authService.getCurrentUserID(), beautyTip.id)
             resolve(res)
           },
           err => reject(err)
@@ -55,18 +69,34 @@ export class BeautyTipDataService {
   {
     return new Promise<any>((resolve, reject) => 
     {
-      firebase.firestore().collection('beautyTips').doc(id).set
+      firebase.firestore().collection('beautyTips').doc(id).update
         ( 
           { 
             title: title,
             description: description,
-            lastEditDate: new Date() 
-          },
-          { merge: true } 
+            lastUpdatedDate: new Date() 
+          }
         )
         .then
         (
           res => resolve(res),
+          err => reject(err)
+        )
+    })
+  }
+
+  deleteBeautyTip(id: string)
+  {
+    return new Promise<any>((resolve, reject) => 
+    {
+      firebase.firestore().collection('beautyTips').doc(id).delete()
+        .then
+        (
+          res => 
+          {
+            this.userDataService.deleteBeautyTipID(this.authService.getCurrentUserID(), id)
+            resolve(res)
+          },
           err => reject(err)
         )
     })

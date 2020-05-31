@@ -4,11 +4,53 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
-  <ion-button class="CreatePostButton" shape="round" (click)="navigateToCreateTipPage()">
-    <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-  </ion-button>
-
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger" (click)="navigateToCreateTipPage()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list>
+    <ion-menu-toggle auto-hide="false" *ngFor="let b of beautyTips; let i = index">
+      
+      <ion-item class="beautyTip">
+        <ion-grid>
+          <ion-row>
+            <ion-label class="TitleLabel">{{ b.title }}</ion-label>
+          </ion-row>
+
+          <ion-row>
+            <ion-label class="TimeLabel">
+              By {{ b.author }}
+              on {{ b.createdDate.toDate().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) }}
+              at {{ b.createdDate.toDate().toLocaleTimeString() }}
+            </ion-label>
+          </ion-row>
+
+          <ion-row>
+            <ion-label class="TimeLabel">
+              Last updated
+              on {{ b.createdDate.toDate().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) }}
+              at {{ b.createdDate.toDate().toLocaleTimeString() }}
+            </ion-label>
+          </ion-row>
+
+          <ion-row>
+            <ion-label class="DescriptionLabel">{{ b.description }}</ion-label>
+          </ion-row>
+
+          <ion-tow>
+            <ion-button class="ViewButton" fill="clear">Details</ion-button>
+          </ion-tow>
+        </ion-grid>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-list>
+
+ 
 </ion-content>

@@ -3,13 +3,37 @@ import { User } from '../models/user.model';
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
-import { newArray } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDataService 
 {
+  userConverter = 
+  {
+    toFirestore(user: User): firebase.firestore.DocumentData
+    {
+      const userDocumentData: firebase.firestore.DocumentData =
+      {
+        uid: user.uid,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        createdDate: user.createdDate,
+        lastSignInDate: user.lastSignInDate,
+        lastActiveDate: user.lastActiveDate,
+        beautyTipIDs: user.beautyTipIDs
+      }
+      return userDocumentData
+    },
+
+    fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): User
+    {
+      const data = snapshot.data(options)!
+      return new User(data.uid, data.email, data.firstName, data.lastName, data.createdDate, data.lastSignInDate, data.lastActiveDate, data.beautyTipIDs)
+    }
+  }
+
   constructor() { }
 
   createUser(uid: string, email: string, displayName: string)
@@ -22,45 +46,35 @@ export class UserDataService
             // If user data is already stored in the database
             if (docSnapshot.exists)
             {
-              this.updateUserLastSignIn(uid)
+              this.updateUserLastSignInDate(uid)
             }
             else
             {
-              let user: User =
-              {
-                uid: uid,
-                email: email,
-                firstName: displayName.split(' ')[0],
-                lastName: displayName.split(' ')[1],
-                createdDate: new Date(),
-                lastSignInDate: new Date(),
-                lastActiveDate: new Date(),
-                beautyTipIDs: []
-              }
-
-              firebase.firestore().collection('users').doc(user.uid).set(user)
+              const user: User = new User(uid, email, displayName.split(' ')[0], displayName.split(' ')[1])
+              firebase.firestore().collection('users').withConverter(this.userConverter).doc(user.uid).set(user)
             }
           }
         )
 
   }
 
-  updateUserLastSignIn(uid: string)
+  updateUserLastSignInDate(uid: string)
   {
     firebase.firestore().collection('users').doc(uid).update
     ( 
       { 
-        lastSignIn: new Date() 
+        lastActiveDate: new Date(),
+        lastSignInDate: new Date() 
       }
     )
   }
 
-  updateUserLastActive(uid: string)
+  updateUserLastActiveDate(uid: string)
   {
     firebase.firestore().collection('users').doc(uid).update
     ( 
       { 
-        lastActive: new Date()
+        lastActiveDate: new Date()
       }
     )
   }
@@ -75,8 +89,15 @@ export class UserDataService
     )
   }
 
-  deleteBeautyTipID(uid: string, beautyTipID: string)
+  async deleteBeautyTipID(uid: string, beautyTipID: string)
   {
-    
+    const userSnap = await firebase.firestore().collection('users').withConverter(this.userConverter).doc().get();
+    const user = userSnap.data();
+    const index: number = user.beautyTipIDs.indexOf(beautyTipID);
+    if (index !== -1)
+    {
+      user.beautyTipIDs.splice(index, 1);
+    }   
+    firebase.firestore().collection('users').doc(user.uid).update(user)
   }
 }

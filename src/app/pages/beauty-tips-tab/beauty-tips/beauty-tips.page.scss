@@ -1,6 +1,30 @@
-ion-icon {
-    font-size: 25px !important;
-    margin: -30px;
+ion-label {
+    display: block;
+}
+
+.TitleLabel {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 2px;
+    margin-top: 5px;
+}
+
+.TimeLabel {
+    font-size: 10px;
+    font-weight: 300;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.DescriptionLabel {
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.ViewButton {
+    float: right;
+    font-size: 10px;
+    color: grey;
 }
 
 ion-button {
@@ -9,11 +33,3 @@ ion-button {
     --background-hover: transparent;
 }
 
-.CreatePostButton {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 50px;
-    height: 50px;
-    --background: #DB4437;
-}
