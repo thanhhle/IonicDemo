@@ -54,7 +54,7 @@ const routes: Routes = [
                 loadChildren: () => import('../menu-tab/manage-tips/manage-tips.module').then( m => m.ManageTipsPageModule)
               },
               {
-                path: 'edit-tip',
+                path: 'edit-tip/:id',
                 loadChildren: () => import('../menu-tab/edit-tip/edit-tip.module').then( m => m.EditTipPageModule)
               },
             ]

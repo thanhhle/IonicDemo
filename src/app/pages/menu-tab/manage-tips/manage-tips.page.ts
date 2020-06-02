@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { BeautyTipDataService } from '../../../services/beauty-tip-data.service'
+import { UserDataService } from '../../../services/user-data.service'
+import { AuthService } from '../../../services/auth.service'
+
+import { BeautyTip } from '../../../models/beauty-tip.model'
 
 @Component({
   selector: 'app-manage-tips',
@@ -7,9 +14,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageTipsPage implements OnInit {
 
-  constructor() { }
+  selectedIndex = 0
+  selectedBeautyTipID: string
+  
+  beautyTipDataService: BeautyTipDataService
+  userDataService: UserDataService
+  authService: AuthService
 
-  ngOnInit() {
+  beautyTips: BeautyTip[]
+
+  constructor(private router: Router, beautyTipDataService: BeautyTipDataService, userDataService: UserDataService, authService: AuthService)
+  {
+    this.userDataService = userDataService
+    this.beautyTipDataService = beautyTipDataService
+    this.authService = authService
+    this.beautyTips = this.getBeautyTips()
+  }
+
+  ngOnInit()
+  {
+
+  }
+
+  doRefresh(event)
+  {
+    setTimeout(() => 
+    {
+      this.beautyTips = this.getBeautyTips()
+      event.target.complete();
+    }, 500);
+ }
+
+  getBeautyTips(): BeautyTip[]
+  {
+    var beautyTips: BeautyTip[] = []
+    this.userDataService.getBeautyTipIDs(this.authService.getCurrentUserID())
+      .then
+      (
+        res => 
+        { 
+          for (var id of res)
+          {
+            this.beautyTipDataService.getBeautyTip(id).then(res => beautyTips.unshift(res.data()))
+          }
+        }
+      )
+
+    return beautyTips 
+  }
+  
+  navigateToCreateTipPage()
+  {   
+    this.router.navigate(['home/beauty-tips/create-tip'])
+  }
+
+  navigateToEditTipPage()
+  {
+    let id = this.beautyTips[this.selectedIndex].id
+    this.router.navigateByUrl("home/beauty-tips/edit-tip/" + id)
   }
 
 }

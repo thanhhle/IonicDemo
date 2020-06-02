@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
+
+import { BeautyTipDataService } from '../../../services/beauty-tip-data.service'
+import { BeautyTip } from '../../../models/beauty-tip.model'
 
 @Component({
   selector: 'app-edit-tip',
@@ -7,9 +14,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditTipPage implements OnInit {
 
-  constructor() { }
+  beautyTip: BeautyTip
+  beautyTipDataService: BeautyTipDataService
 
-  ngOnInit() {
+  constructor(private route: ActivatedRoute, beautyTipDataService: BeautyTipDataService)
+  {
+    this.beautyTipDataService = beautyTipDataService
   }
 
+  ngOnInit() {
+
+  }
 }

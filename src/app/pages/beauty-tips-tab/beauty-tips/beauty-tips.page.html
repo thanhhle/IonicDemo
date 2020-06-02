@@ -17,7 +17,6 @@
 
   <ion-list>
     <ion-menu-toggle auto-hide="false" *ngFor="let b of beautyTips; let i = index">
-      
       <ion-item class="beautyTip">
         <ion-grid>
           <ion-row>
@@ -43,10 +42,7 @@
           <ion-row>
             <ion-label class="DescriptionLabel">{{ b.description }}</ion-label>
           </ion-row>
-
-          <ion-tow>
-            <ion-button class="ViewButton" fill="clear">Details</ion-button>
-          </ion-tow>
+          
         </ion-grid>
       </ion-item>
     </ion-menu-toggle>

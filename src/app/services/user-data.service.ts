@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+
+import { User } from '../models/user.model';
+import { BeautyTip } from '../models/beauty-tip.model';
+
+import { BeautyTipDataService } from './beauty-tip-data.service'
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +59,6 @@ export class UserDataService
             }
           }
         )
-
   }
 
   updateUserLastSignInDate(uid: string)
@@ -89,9 +92,10 @@ export class UserDataService
     )
   }
 
+  /*
   async deleteBeautyTipID(uid: string, beautyTipID: string)
   {
-    const userSnap = await firebase.firestore().collection('users').withConverter(this.userConverter).doc().get();
+    const userSnap = await firebase.firestore().collection('users').withConverter(this.userConverter).doc(uid).get();
     const user = userSnap.data();
     const index: number = user.beautyTipIDs.indexOf(beautyTipID);
     if (index !== -1)
@@ -100,4 +104,19 @@ export class UserDataService
     }   
     firebase.firestore().collection('users').doc(user.uid).update(user)
   }
+  */
+
+ getBeautyTipIDs(uid: string)
+ {
+   return new Promise<any>((resolve, reject) => 
+   {
+     firebase.firestore().collection('users').withConverter(this.userConverter).doc(uid).get()
+       .then
+       (
+         res => resolve(res.data().beautyTipIDs),
+         err => reject(err)
+       )
+   })
+ }
+
 }

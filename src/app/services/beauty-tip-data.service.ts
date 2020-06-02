@@ -10,7 +10,8 @@ import { UserDataService } from './user-data.service'
 @Injectable({
   providedIn: 'root'
 })
-export class BeautyTipDataService {
+export class BeautyTipDataService 
+{
 
   authService: AuthService
   userDataService: UserDataService
@@ -85,6 +86,7 @@ export class BeautyTipDataService {
     })
   }
 
+  /*
   deleteBeautyTip(id: string)
   {
     return new Promise<any>((resolve, reject) => 
@@ -101,4 +103,30 @@ export class BeautyTipDataService {
         )
     })
   }
+  */
+
+  
+  getBeautyTip(id: string)
+  {
+    return new Promise<any>((resolve, reject) => 
+    {
+      firebase.firestore().collection('beautyTips').withConverter(this.beautyTipConverter).doc(id).get()
+        .then
+        (
+          res => resolve(res),
+          err => reject(err) 
+        )
+    })
+  }
+  
+
+ getBeautyTipsFromCurrentUser()
+ {
+   return new Promise<any>((resolve, reject) =>
+   {
+      var beautyTipIDs: string[] = []
+      this.userDataService.getBeautyTipIDs(this.authService.getCurrentUserID()).then(res => beautyTipIDs.push(res.data()))
+
+   })
+ }
 }

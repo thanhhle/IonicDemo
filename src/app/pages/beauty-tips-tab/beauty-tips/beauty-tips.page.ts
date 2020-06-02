@@ -14,6 +14,9 @@ import { BeautyTip } from '../../../models/beauty-tip.model'
 })
 export class BeautyTipsPage implements OnInit {
 
+  selectedIndex = 0
+  selectedBeautyTipID: string
+
   beautyTipDataService: BeautyTipDataService
   beautyTips: BeautyTip[]
 
@@ -54,6 +57,13 @@ export class BeautyTipsPage implements OnInit {
   navigateToCreateTipPage()
   {   
     this.router.navigate(['home/beauty-tips/create-tip'])
+  }
+
+
+  navigateToEditTipPage()
+  {
+    let id = this.beautyTips[this.selectedIndex].id
+    //this.router.navigateByUrl("home/beauty-tips/edit-tip/" + id)
   }
 
 }
