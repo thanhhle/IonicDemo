@@ -59,14 +59,14 @@ ion-icon {
     width: 55px;
     height: 55px;
     margin: 15px 15px 0px;
-    --background: #DB4437;
+    //--background: #DB4437;
 }
 
 .FacebookIconButton {
     width: 55px;
     height: 55px;
     margin: 15px 15px 0px;
-    --background: #4267B2;
+    //--background: #4267B2;
 }
 
 ion-toolbar {
@@ -83,6 +83,7 @@ ion-toolbar {
 .SignUpButton {
     margin-top: -4px;
     font-size: 12px;
+    font-weight: 500;
     --border-radius: 50px;
     height: 35px;
 }
