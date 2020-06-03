@@ -14,13 +14,13 @@ export class MenuPage implements OnInit {
   selectedIndex = 0
   menuPages = [
     {
-      title: 'Your Account',
-      url: 'manage-account',
+      title: 'My Account',
+      url: 'my-account',
       icon: 'person-outline'
     },
     {
-      title: 'Your Tips',
-      url: 'manage-tips',
+      title: 'My Tips',
+      url: 'my-tips',
       icon: 'bulb-outline'
     },
   ]

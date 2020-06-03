@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ManageTipsPageRoutingModule } from './manage-tips-routing.module';
+import { ReadyToWearPageRoutingModule } from './ready-to-wear-routing.module';
 
-import { ManageTipsPage } from './manage-tips.page';
+import { ReadyToWearPage } from './ready-to-wear.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ManageTipsPageRoutingModule
+    ReadyToWearPageRoutingModule
   ],
-  declarations: [ManageTipsPage]
+  declarations: [ReadyToWearPage]
 })
-export class ManageTipsPageModule {}
+export class ReadyToWearPageModule {}

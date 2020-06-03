@@ -8,11 +8,11 @@ import { AuthService } from '../../../services/auth.service'
 import { BeautyTip } from '../../../models/beauty-tip.model'
 
 @Component({
-  selector: 'app-manage-tips',
-  templateUrl: './manage-tips.page.html',
-  styleUrls: ['./manage-tips.page.scss'],
+  selector: 'app-my-tips',
+  templateUrl: './my-tips.page.html',
+  styleUrls: ['./my-tips.page.scss'],
 })
-export class ManageTipsPage implements OnInit {
+export class MyTipsPage implements OnInit {
 
   selectedIndex = 0
   selectedBeautyTipID: string

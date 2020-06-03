@@ -16,6 +16,18 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../products-tab/products/products.module').then(m => m.ProductsPageModule)
+          },
+          {
+            path: 'ready-to-wear',
+            loadChildren: () => import('../products-tab/ready-to-wear/ready-to-wear.module').then( m => m.ReadyToWearPageModule)
+          },
+          {
+            path: 'bags',
+            loadChildren: () => import('../products-tab/bags/bags.module').then( m => m.BagsPageModule)
+          },
+          {
+            path: 'accessories',
+            loadChildren: () => import('../products-tab/accessories/accessories.module').then( m => m.AccessoriesPageModule)
           }
         ]
       },
@@ -39,23 +51,23 @@ const routes: Routes = [
         [
           {
             path: '',
-            loadChildren: () => import('../menu-tab/menu/menu.module').then(m => m.MenuPageModule)
+            loadChildren: () => import('../me-tab/menu/menu.module').then(m => m.MenuPageModule)
           },
           {
-            path: 'manage-account',
-            loadChildren: () => import('../menu-tab/manage-account/manage-account.module').then( m => m.ManageAccountPageModule)
+            path: 'my-account',
+            loadChildren: () => import('../me-tab/my-account/my-account.module').then( m => m.MyAccountPageModule)
           },
           {
-            path: 'manage-tips',
+            path: 'my-tips',
             children:
             [
               {
                 path: '',
-                loadChildren: () => import('../menu-tab/manage-tips/manage-tips.module').then( m => m.ManageTipsPageModule)
+                loadChildren: () => import('../me-tab/my-tips/my-tips.module').then( m => m.MyTipsPageModule)
               },
               {
                 path: 'edit-tip/:id',
-                loadChildren: () => import('../menu-tab/edit-tip/edit-tip.module').then( m => m.EditTipPageModule)
+                loadChildren: () => import('../me-tab/edit-tip/edit-tip.module').then( m => m.EditTipPageModule)
               },
             ]
             
