@@ -16,16 +16,25 @@ ion-label {
     margin-top: 3px;
 }
 
-.DescriptionLabel {
+.DescriptionText {
     font-size: 12px;
     margin-top: 15px;
     margin-bottom: 10px;
-}
 
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
 
 ion-button {
     text-transform: none;
     font-weight: 400;
     --background-hover: transparent;
 }
+
+.line-clamp {
+      
+  }
 
