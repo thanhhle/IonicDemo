@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import * as firebase from 'firebase/app';
-import 'firebase/firestore';
-
 import { BeautyTipDataService } from '../../../services/beauty-tip-data.service'
 import { BeautyTip } from '../../../models/beauty-tip.model'
 
@@ -15,7 +12,6 @@ import { BeautyTip } from '../../../models/beauty-tip.model'
 export class BeautyTipsPage implements OnInit {
 
   selectedIndex = 0
-  selectedBeautyTipID: string
 
   beautyTipDataService: BeautyTipDataService
   beautyTips: BeautyTip[]
@@ -41,17 +37,7 @@ export class BeautyTipsPage implements OnInit {
 
   getBeautyTips(): BeautyTip[]
   {
-    const beautyTips: BeautyTip[] = []
-    firebase.firestore().collection('beautyTips').orderBy("createdDate", "desc").withConverter(this.beautyTipDataService.beautyTipConverter).get()
-      .then(function(querySnapshot)
-      {
-        querySnapshot.forEach(function(doc) 
-        {
-          beautyTips.push(doc.data())
-        })
-      })
-
-    return beautyTips
+    return this.beautyTipDataService.getAllBeautyTips()
   }
 
   navigateToCreateTipPage()
@@ -62,7 +48,7 @@ export class BeautyTipsPage implements OnInit {
 
   navigateToEditTipPage()
   {
-    let id = this.beautyTips[this.selectedIndex].id
+    // let id = this.beautyTips[this.selectedIndex].id
     //this.router.navigateByUrl("home/beauty-tips/edit-tip/" + id)
   }
 

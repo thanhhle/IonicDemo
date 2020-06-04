@@ -11,7 +11,7 @@ ion-label {
 .DescriptionLabel {
     margin: 5px 25px 40px;
     font-size: 13px;
-    opacity: 50%;
+    opacity: 70%;
     font-weight: 450;  
 }
 
@@ -46,7 +46,7 @@ ion-button {
 .OrConnectingUsingLabel {
     text-align: center;
     font-size: 12px;
-    opacity: 70%;
+    opacity: 80%;
     margin-top: 25px;
 }
 
@@ -59,6 +59,8 @@ ion-icon {
     width: 55px;
     height: 55px;
     margin: 15px 15px 0px;
+    border: 1.5px solid #222428;
+    border-radius: 50px;
     //--background: #DB4437;
 }
 
@@ -66,6 +68,8 @@ ion-icon {
     width: 55px;
     height: 55px;
     margin: 15px 15px 0px;
+    border: 1.5px solid #222428;
+    border-radius: 50px;
     //--background: #4267B2;
 }
 

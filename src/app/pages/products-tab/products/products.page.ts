@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { ProductCategoryDataService } from '../../../services/product-category-data.service'
+import { ProductCategory } from '../../../models/product-category.model'
 
 @Component({
   selector: 'app-products',
@@ -8,28 +12,23 @@ import { Component, OnInit } from '@angular/core';
 export class ProductsPage implements OnInit {
   
   selectedIndex = 0
-  productPages = [
-    {
-      title: 'READY-TO-WEAR',
-      url: 'ready-to-wear',
-      image: './assets/image/ready-to-wear.jpeg'
-    },
-    {
-      title: 'BAGS',
-      url: 'bags',
-      image: './assets/image/bags.jpeg'
-    },
-    {
-      title: 'ACCESSORIES',
-      url: 'accessories',
-      image: './assets/image/accessories.jpeg'
-    },
-  ]
-  
+  productCategories: ProductCategory[]
 
-  constructor() { }
+  productCategoryDataService: ProductCategoryDataService
+  
+  constructor(private router: Router, productCategoryDataService: ProductCategoryDataService)
+  { 
+    this.productCategoryDataService = productCategoryDataService
+    this.productCategories = this.getProductCategories()
+    console.log(this.productCategories)
+  }
 
   ngOnInit() {
+  }
+
+  getProductCategories(): ProductCategory[]
+  {
+    return this.productCategoryDataService.getAllProductCategories()
   }
 
 }

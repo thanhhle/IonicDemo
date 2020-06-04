@@ -15,8 +15,7 @@ import { BeautyTip } from '../../../models/beauty-tip.model'
 export class MyTipsPage implements OnInit {
 
   selectedIndex = 0
-  selectedBeautyTipID: string
-  
+
   beautyTipDataService: BeautyTipDataService
   userDataService: UserDataService
   authService: AuthService

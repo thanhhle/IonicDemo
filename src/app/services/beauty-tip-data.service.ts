@@ -118,15 +118,20 @@ export class BeautyTipDataService
         )
     })
   }
-  
 
- getBeautyTipsFromCurrentUser()
- {
-   return new Promise<any>((resolve, reject) =>
-   {
-      var beautyTipIDs: string[] = []
-      this.userDataService.getBeautyTipIDs(this.authService.getCurrentUserID()).then(res => beautyTipIDs.push(res.data()))
+  getAllBeautyTips(): BeautyTip[]
+  {
+    const beautyTips: BeautyTip[] = []
 
-   })
- }
+    firebase.firestore().collection('beautyTips').orderBy("createdDate", "desc").withConverter(this.beautyTipConverter).get()
+      .then((querySnapshot) =>
+        { 
+          querySnapshot.forEach((doc) => 
+          {
+            beautyTips.push(doc.data())
+          })
+        })
+
+    return beautyTips
+  }
 }
