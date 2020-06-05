@@ -28,16 +28,5 @@ export class ReadyToWearPage implements OnInit {
   getProducts(): Product[]
   {
     return this.productDataService.getProducts("ready-to-wear")
-  }
-
-  formatPrice(price: number): string
-  {
-    var formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-    
-    return formatter.format(price);
-  }
-  
+  } 
 }

@@ -28,13 +28,4 @@ export class BagsPage implements OnInit {
   {
     return this.productDataService.getProducts("bags")
   }
-
-  formatPrice(price: number): string
-  {
-    var formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });   
-    return formatter.format(price);
-  }
 }

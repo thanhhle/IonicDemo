@@ -27,7 +27,7 @@
             </ion-row>
 
             <ion-row>
-              <p class="ProductPrice">{{[formatPrice(p.price)]}}</p> 
+              <p class="ProductPrice">{{p.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}}</p> 
             </ion-row>
           </ion-grid>
         </ion-item>

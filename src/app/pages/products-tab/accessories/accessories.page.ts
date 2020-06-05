@@ -28,15 +28,4 @@ export class AccessoriesPage implements OnInit {
   {
     return this.productDataService.getProducts("accessories")
   }
-
-  formatPrice(price: number): string
-  {
-    var formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-    
-    return formatter.format(price);
-  }
-  
 }
