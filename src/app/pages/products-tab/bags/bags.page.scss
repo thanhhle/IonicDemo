@@ -1,0 +1,30 @@
+ion-item:hover {
+    --background-hover: transparent;
+    border-bottom: 2px solid #222428;
+}
+
+p {
+    width: 100%;
+    text-align: center;
+}
+
+
+div {
+    display: inline-table;
+}
+
+.ProductName {
+    margin-bottom: -5px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.ProductDescription {
+    margin-bottom: 0px;
+    font-size: 11.5px;
+}
+
+.ProductPrice {
+    font-size: 13px;
+    font-weight: 500;
+}

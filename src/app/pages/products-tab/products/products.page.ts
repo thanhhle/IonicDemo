@@ -20,7 +20,6 @@ export class ProductsPage implements OnInit {
   { 
     this.productCategoryDataService = productCategoryDataService
     this.productCategories = this.getProductCategories()
-    console.log(this.productCategories)
   }
 
   ngOnInit() {

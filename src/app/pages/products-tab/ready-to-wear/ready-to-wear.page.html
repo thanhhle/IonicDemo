@@ -9,5 +9,30 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeLg="3" sizeMd="3" sizeXs="12" *ngFor="let p of products; let i = index">
+        <ion-item button detail="false">
+          <ion-grid>
+            <ion-row>
+              <ion-img [src]="[p.imageURL]"></ion-img>
+            </ion-row>
 
+            <ion-row>
+              <p class="ProductName">{{p.name}}</p>
+            </ion-row>
+
+            <ion-row>
+              <p class="ProductDescription">{{p.description}}</p> 
+            </ion-row>
+
+            <ion-row>
+              <p class="ProductPrice">{{[formatPrice(p.price)]}}</p> 
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+

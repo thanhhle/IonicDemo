@@ -15,9 +15,9 @@ export class ProductDataService
     {
       const productDocumentData: firebase.firestore.DocumentData =
       {
-        model: product.model,
         name: product.name,
         imageURL: product.imageURL,
+        description: product.description,
         price: product.price
       }
       return productDocumentData
@@ -26,25 +26,25 @@ export class ProductDataService
     fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): Product
     {
       const data = snapshot.data(options)!
-      return new Product(data.model, data.name, data.imageURL, data.price)
+      return new Product(data.name, data.imageURL, data.description, data.price)
     }
   }
 
   constructor() { }
 
-  /*
-  getProductCategories(): string[]
+  getProducts(category: string): Product[]
   {
-    const categories: string[] = []
-      firebase.firestore().collection('productCategories').get()
-        .then(querySnapshot => 
+    const products: Product[] = []
+
+    firebase.firestore().collection('productCategories').doc(category).collection('products').withConverter(this.productConverter).get()
+      .then((querySnapshot) =>
+        { 
+          querySnapshot.forEach((doc) => 
           {
-            querySnapshot.forEach((doc) => 
-            {
-              categories.unshift(doc.id);
-            })
+            products.unshift(doc.data())
           })
-    return categories
+        })
+
+    return products
   }
-  */
 }
