@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home/product-categories/accessories',
+    redirectTo: 'home/product-categories',
     pathMatch: 'full'
   },
   {
