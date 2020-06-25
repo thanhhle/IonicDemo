@@ -10,26 +10,22 @@ const routes: Routes = [
     children:
     [
       {
-        path: 'products',
+        path: 'product-categories',
         children:
         [
           {
             path: '',
+            loadChildren: () => import('../products-tab/product-categories/product-categories.module').then(m => m.ProductCategoriesPageModule)
+          },
+          {
+            path: ':id',
             loadChildren: () => import('../products-tab/products/products.module').then(m => m.ProductsPageModule)
           },
-          {
-            path: 'ready-to-wear',
-            loadChildren: () => import('../products-tab/ready-to-wear/ready-to-wear.module').then( m => m.ReadyToWearPageModule)
-          },
-          {
-            path: 'bags',
-            loadChildren: () => import('../products-tab/bags/bags.module').then( m => m.BagsPageModule)
-          },
-          {
-            path: 'accessories',
-            loadChildren: () => import('../products-tab/accessories/accessories.module').then( m => m.AccessoriesPageModule)
-          }
         ]
+      },
+      {
+        path: 'product-categories/products',
+        loadChildren: () => import('../products-tab/products/products.module').then(m => m.ProductsPageModule)
       },
       {
         path: 'beauty-tips',
@@ -70,20 +66,23 @@ const routes: Routes = [
                 loadChildren: () => import('../me-tab/edit-tip/edit-tip.module').then( m => m.EditTipPageModule)
               },
             ]
-            
+          },
+          {
+            path: 'my-cart',
+            loadChildren: () => import('../me-tab/my-cart/my-cart.module').then( m => m.MyCartPageModule)
           },
         ]
       },
       {
         path: '',
-        redirectTo: '/home/products',
+        redirectTo: '/home/product-categories',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/home/products',
+    redirectTo: '/home/product-categories',
     pathMatch: 'full'
   }
 ];

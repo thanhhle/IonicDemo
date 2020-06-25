@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ReadyToWearPageRoutingModule } from './ready-to-wear-routing.module';
+import { MyCartPageRoutingModule } from './my-cart-routing.module';
 
-import { ReadyToWearPage } from './ready-to-wear.page';
+import { MyCartPage } from './my-cart.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReadyToWearPageRoutingModule
+    MyCartPageRoutingModule
   ],
-  declarations: [ReadyToWearPage]
+  declarations: [MyCartPage]
 })
-export class ReadyToWearPageModule {}
+export class MyCartPageModule {}

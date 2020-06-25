@@ -1,0 +1,86 @@
+ion-thumbnail {
+    height: 50px;
+    width: 50px;
+}
+
+ion-grid {
+    --ion-safe-area-left: 0;
+    --ion-safe-area-right: 0;
+}
+
+ion-list {
+    --ion-safe-area-right: 0;
+}
+
+.quantityGrid {
+    border: none;
+    margin-bottom: -20px;
+    margin-top: -20px;
+    margin-left: -10px;
+}
+
+.quantityButton {
+    height: 20px;
+    width: 20px;
+    padding-left: 20px;
+    padding-right: 30px;
+}
+
+.quantityIcon {
+    font-size: 15px !important;
+    margin: -20px;
+}
+
+.nameText {
+    font-size: 13px;
+}
+
+.modelText {
+    font-size: 11px;
+}
+
+.quantityText {
+    font-size: 12px;
+    text-align: center;
+}
+
+.priceText {
+    font-size: 12px;
+}
+
+/*
+.itemCount {
+    border-bottom: solid 1px var(--ion-color-dark);
+}
+*/
+
+.itemCountLabel {
+    margin-left: 10px;
+}
+
+.totalPriceGrid {
+    margin-bottom: -20px;
+    margin-top: -10px;
+}
+
+.totalPriceLabel {
+    font-size: 16px;
+}
+
+.totalPriceText {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+ion-button {
+    text-transform: none;
+    font-weight: 400;
+    --background-hover: transparent;
+}
+
+.checkOutButton {
+    margin: 40px 25px 0px;
+    height: 40px;
+    font-size: 15px;
+
+}

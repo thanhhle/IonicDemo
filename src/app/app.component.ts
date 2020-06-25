@@ -10,6 +10,24 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  public selectedIndex = 0
+  public appPages = [
+    {
+      title: 'Products',
+      url: 'home/product-categories',
+      icon: 'grid-outline'
+    },
+    {
+      title: 'Beauty Tips',
+      url: 'home/beauty-tips',
+      icon: 'bulb-outline'
+    },
+    {
+      title: 'Me',
+      url: 'home/menu',
+      icon: 'person-circle-outline'
+    }
+  ]
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -24,4 +42,13 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  /*
+  ngOnInit() {
+    const path = window.location.pathname.split('home/')[1];
+    if (path !== undefined) {
+      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+    }
+  }
+  */
 }

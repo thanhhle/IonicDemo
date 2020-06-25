@@ -23,6 +23,11 @@ export class MenuPage implements OnInit {
       url: 'my-tips',
       icon: 'bulb-outline'
     },
+    {
+      title: 'My Cart',
+      url: 'my-cart',
+      icon: 'cart-outline'
+    }
   ]
 
   constructor(

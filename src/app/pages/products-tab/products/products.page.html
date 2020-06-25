@@ -1,16 +1,122 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Products</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark" text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ productCategory | titlecase }}</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="navigateToMyCartPage()">
+        <ion-icon slot="start" name="cart-outline"></ion-icon>
+        <ion-label>{{ getCartItemCount() }}</ion-label>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let p of productCategories; let i = index">
-    <ion-item (click)="selectedIndex = i" routerDirection="forward" [routerLink]="[p.path]" lines="none" detail="false" [class.selected]="selectedIndex == i">
-      <div class="ImageContainer">
-        <ion-img [src]="[p.titleImageURL]"></ion-img>
-        <ion-label class="ImageLabel">{{p.name}}</ion-label> 
-      </div>  
-    </ion-item> 
+  <ion-item class="ion-text-center" lines="full">
+
+    <ion-button color="dark" fill="clear" (click)="viewInFull()">
+      <ion-icon name="tablet-portrait-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button color="dark" fill="clear" (click)="viewAsGrid()" >
+      <ion-icon slot="icon-only" name="grid-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button color="dark" fill="clear" (click)="viewAsList()">
+      <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+    </ion-button>
+
+  </ion-item>
+
+  <ion-grid class="ProductDisplayGrid" *ngIf="displayMode === 0">
+    <ion-row>
+      <ion-col sizeLg="4" sizeMd="6" sizeXs="12" *ngFor="let p of products; let i = index">
+        <ion-item class="ProductContainer" button detail="false">
+          <ion-grid>
+            <ion-row>
+              <ion-img [src]="[p.imageURL]"></ion-img>
+            </ion-row>
+
+            <ion-row>
+              <p class="ProductName">{{ p.name }}</p>
+            </ion-row>
+
+            <ion-row>
+              <p class="ProductDescription">{{ p.description }}</p> 
+            </ion-row>
+
+            <ion-row>
+              <p class="ProductPrice">{{ p.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</p> 
+            </ion-row>
+
+            <ion-row>
+              <ion-button class="AddToCartButton" color="dark" (click)="addToCart(p)">Add To Cart</ion-button> 
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="ProductDisplayGrid" *ngIf="displayMode === 1">
+    <ion-row>
+      <ion-col sizeLg="3" sizeMd="4" sizeXs="6" *ngFor="let p of products; let i = index">
+        <ion-item class="ProductContainer" button detail="false">
+          <ion-grid>
+            <ion-row>
+              <ion-img [src]="[p.imageURL]"></ion-img>
+            </ion-row>
+
+            <ion-row>
+              <p class="ProductNameGrid">{{ p.name }}</p>
+            </ion-row>
+
+            <ion-row>
+              <p class="ProductDescriptionGrid">{{ p.model }}</p> 
+            </ion-row>
+
+            <ion-row>
+              <p class="ProductPriceGrid">{{ p.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</p> 
+            </ion-row>
+
+            <ion-row>
+              <ion-button class="AddToCartButtonGrid" color="dark" (click)="addToCart(p)">Add To Cart</ion-button> 
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
+  <ion-list *ngIf="displayMode === 2"> 
+    <ion-item button *ngFor="let p of products" class="ProductContainer" lines="full" detail="false">
+      
+        <ion-thumbnail slot="start">
+          <img [src]="[p.imageURL]">
+        </ion-thumbnail>
+
+        <ion-label>
+          <h3 class="ProductNameList">{{ p.name }}</h3>
+          <h3 class="ProductDescriptionList">{{ p.model }}</h3>
+
+          <ion-grid class="ProductPriceContainer">
+            <ion-row class="ion-align-items-center">
+              <ion-col class="ion-align-self-center">
+                <p class="ProductPriceList">{{ p.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</p> 
+              </ion-col>
+
+              <ion-col class="ion-align-self-center">
+                <ion-button class="AddToCartButtonList" color="dark" expand="block" (click)="addToCart(p)">Add To Cart</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid> 
+        </ion-label>
+      
+    </ion-item>
   </ion-list>
 </ion-content>

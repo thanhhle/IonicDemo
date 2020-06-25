@@ -1,0 +1,36 @@
+ion-content {
+    --offset-bottom: auto!important;
+    --overflow: hidden;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+}
+
+ion-list {
+    padding: 0px;
+}
+
+ion-item {
+    --ion-safe-area-left: 0;
+    --ion-safe-area-right: 0;
+}
+
+.ImageContainer {
+    position: relative;
+    text-align: center;
+}
+
+.ImageLabel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    --color: white;
+    font-weight: 500;
+    text-shadow: 0 0 4px #4d4d4d;
+}
+
+ion-toolbar {
+    --border: none;
+}

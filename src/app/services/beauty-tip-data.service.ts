@@ -12,7 +12,6 @@ import { UserDataService } from './user-data.service'
 })
 export class BeautyTipDataService 
 {
-
   authService: AuthService
   userDataService: UserDataService
   beautyTipConverter = 

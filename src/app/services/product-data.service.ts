@@ -15,6 +15,7 @@ export class ProductDataService
     {
       const productDocumentData: firebase.firestore.DocumentData =
       {
+        model: product.model,
         name: product.name,
         imageURL: product.imageURL,
         description: product.description,
@@ -26,7 +27,7 @@ export class ProductDataService
     fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): Product
     {
       const data = snapshot.data(options)!
-      return new Product(data.name, data.imageURL, data.description, data.price)
+      return new Product(data.model, data.name, data.imageURL, data.description, data.price)
     }
   }
 

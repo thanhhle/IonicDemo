@@ -1,36 +1,112 @@
-ion-content {
-    --offset-bottom: auto!important;
-    --overflow: hidden;
-    overflow: auto;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+.ProductContainer:hover {
+    --background-hover: transparent;
+    border-bottom: 2px solid #222428;
 }
 
-ion-list {
-    padding: 0px;
+p {
+    width: 100%;
 }
 
-ion-item {
+div {
+    display: inline-table;
+}
+
+.ProductName {
+    margin-bottom: -5px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.ProductDescription {
+    margin-bottom: 0px;
+    font-size: 11.5px;
+    text-align: center;
+    opacity: 60%;
+}
+
+.ProductPrice {
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.AddToCartButton {
+    text-transform: none;
+    font-weight: 400;
+    --background-hover: transparent;
+    position: relative;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin-bottom: 15px;
+}
+
+.ProductNameGrid {
+    margin-bottom: -5px;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.ProductDescriptionGrid {
+    margin-bottom: 0px;
+    font-size: 10px;
+    text-align: center;
+    opacity: 60%;
+}
+
+.ProductPriceGrid {
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.AddToCartButtonGrid {
+    font-size: 10px;
+    text-transform: none;
+    font-weight: 400;
+    --background-hover: transparent;
+    position: relative;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin-bottom: 15px;
+}
+
+.ProductNameList {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.ProductDescriptionList {
+    font-size: 11px;
+    opacity: 60%;
+    margin-top: 5px;
+}
+
+.ProductPriceList {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.ProductPriceContainer {
+    border: none;
+    margin-left: -10px;
+    margin-bottom: -5px;
+}
+
+.AddToCartButtonList {
+    text-transform: none;
+    font-weight: 400;
+    font-size: 11px;
+    margin-top: -10px;
+    height: 25px;
+    --background-hover: transparent;
+}
+
+.ProductDisplayGrid {
     --ion-safe-area-left: 0;
     --ion-safe-area-right: 0;
 }
 
-.ImageContainer {
-    position: relative;
-    text-align: center;
-}
-
-.ImageLabel {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    --color: white;
-    font-weight: 500;
-    text-shadow: 0 0 4px #4d4d4d;
-}
-
-ion-toolbar {
-    --border: none;
-}
