@@ -33,6 +33,23 @@ export class ProductDataService
 
   constructor() { }
 
+  addProduct(category: string, model: string, name: string, imageURL: string, description: string, price: number)
+  {
+    return new Promise<any>((resolve, reject) => 
+    {
+      const product = new Product(model, name, imageURL, description, price)
+      console.log(product)
+      
+      firebase.firestore().collection('productCategories').doc(category).collection('products')
+        .withConverter(this.productConverter).doc(product.model).set(product)
+        .then
+        (
+          res => resolve(res),
+          err => reject(err)
+        )
+    }) 
+  }
+
   getProducts(category: string): Product[]
   {
     const products: Product[] = []

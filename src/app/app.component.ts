@@ -15,7 +15,12 @@ export class AppComponent {
     {
       title: 'Products',
       url: 'home/product-categories',
-      icon: 'grid-outline'
+      icon: 'basket-outline'
+    },
+    {
+      title: 'Add Product',
+      url: 'home/add-product',
+      icon: 'add-outline'
     },
     {
       title: 'Beauty Tips',

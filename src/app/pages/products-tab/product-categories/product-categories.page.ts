@@ -27,10 +27,7 @@ export class ProductCategoriesPage implements OnInit
   }
 
   ngOnInit() {
-    const path = window.location.pathname.split('home/product-categories/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.productCategories.findIndex(page => page.path.toLowerCase() === path.toLowerCase());
-    }
+  
   }
 
   getProductCategories(): ProductCategory[]

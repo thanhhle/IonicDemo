@@ -29,7 +29,7 @@ export class ProductsPage implements OnInit {
 
   ngOnInit()
   {
-    this.displayMode = 0
+    this.displayMode = 1
     this.productCategory = this.activatedRoute.snapshot.paramMap.get('id')
     this.products = this.getProducts()
   }
@@ -67,6 +67,11 @@ export class ProductsPage implements OnInit {
   navigateToMyCartPage()
   {
     this.router.navigateByUrl('home/menu/my-cart')
+  }
+
+  navigateToAddProductPage()
+  {
+    this.router.navigateByUrl('home/add-product')
   }
   
 }

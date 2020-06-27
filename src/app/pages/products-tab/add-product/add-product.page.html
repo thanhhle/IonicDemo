@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+  
+    <ion-title>New Product</ion-title>
+  
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="addProduct()">Add</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item color="dark">
+      <ion-label>Category</ion-label>
+      <ion-select color="dark" ok-text="Okay" cancel-text="Dismiss" [(ngModel)]='selectedCategory'>
+        <ion-select-option *ngFor="let category of productCategories" [value]="category">{{ category.name | titlecase }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="ImageItem" lines="none">
+      <div class="ImageContainer">
+        <ion-button class="AddImageButton" fill="clear" expand="block" color="dark" (click)="uploadImage()">
+          <ion-icon *ngIf="imageUploaded == false" slot="start" name="add-outline"></ion-icon>
+          <ion-text *ngIf="imageUploaded == false">ADD IMAGE</ion-text>
+          <ion-img *ngIf="imageUploaded == true" [src]="productImageURL" (ionError)="notifyImageLoadedFail()"></ion-img>
+        </ion-button>
+      </div>  
+      <!--<ion-img class="ion-no-margin ion-no-padding" [src]="productImageURL ? productImageURL : './assets/image/default.jpg'"></ion-img>-->
+    </ion-item>
+    
+
+    <ion-item>
+      <ion-label position="stacked">Model</ion-label>
+      <ion-input required type="text" [(ngModel)]='productModel' name='productModel'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input required type="text" [(ngModel)]='productName' name='productName'></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea required type="text" [(ngModel)]='productDescription' name='productDescription'></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Price</ion-label>
+      <ion-input required type="number" [(ngModel)]='productPrice' name='productPrice'>$</ion-input>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

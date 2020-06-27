@@ -19,13 +19,15 @@ const routes: Routes = [
           },
           {
             path: ':id',
-            loadChildren: () => import('../products-tab/products/products.module').then(m => m.ProductsPageModule)
+            children:
+            [
+              {
+                path: '',
+                loadChildren: () => import('../products-tab/products/products.module').then(m => m.ProductsPageModule)
+              },
+            ]   
           },
         ]
-      },
-      {
-        path: 'product-categories/products',
-        loadChildren: () => import('../products-tab/products/products.module').then(m => m.ProductsPageModule)
       },
       {
         path: 'beauty-tips',
@@ -72,6 +74,10 @@ const routes: Routes = [
             loadChildren: () => import('../me-tab/my-cart/my-cart.module').then( m => m.MyCartPageModule)
           },
         ]
+      },
+      {
+        path: 'add-product',
+        loadChildren: () => import('../products-tab/add-product/add-product.module').then( m => m.AddProductPageModule)
       },
       {
         path: '',

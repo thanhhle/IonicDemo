@@ -15,24 +15,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="displayMode === 0">
   <ion-item class="ion-text-center" lines="full">
-
-    <ion-button color="dark" fill="clear" (click)="viewInFull()">
-      <ion-icon name="tablet-portrait-outline"></ion-icon>
+    <ion-button slot="start" color="dark" fill="clear" (click)="viewInFull()">
+      <ion-icon slot="icon-only" name="tablet-portrait-outline"></ion-icon>
     </ion-button>
 
-    <ion-button color="dark" fill="clear" (click)="viewAsGrid()" >
-      <ion-icon slot="icon-only" name="grid-outline"></ion-icon>
+    <ion-button slot="start" color="dark" fill="clear">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      Add Product
     </ion-button>
-
-    <ion-button color="dark" fill="clear" (click)="viewAsList()">
-      <ion-icon slot="icon-only" name="list-outline"></ion-icon>
-    </ion-button>
-
   </ion-item>
 
-  <ion-grid class="ProductDisplayGrid" *ngIf="displayMode === 0">
+  <ion-grid class="ProductDisplayGrid">
     <ion-row>
       <ion-col sizeLg="4" sizeMd="6" sizeXs="12" *ngFor="let p of products; let i = index">
         <ion-item class="ProductContainer" button detail="false">
@@ -61,8 +56,21 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+</ion-content>
 
-  <ion-grid class="ProductDisplayGrid" *ngIf="displayMode === 1">
+<ion-content *ngIf="displayMode === 1">
+  <ion-item class="ion-text-center" lines="full">
+    <ion-button slot="end" color="dark" fill="clear" (click)="viewAsList()">
+      <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button slot="start" color="dark" fill="clear" (click)="navigateToAddProductPage()">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      Add Product
+    </ion-button>
+  </ion-item>
+
+  <ion-grid class="ProductDisplayGrid">
     <ion-row>
       <ion-col sizeLg="3" sizeMd="4" sizeXs="6" *ngFor="let p of products; let i = index">
         <ion-item class="ProductContainer" button detail="false">
@@ -91,8 +99,20 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+</ion-content>
 
-  
+<ion-content *ngIf="displayMode === 2">
+  <ion-item class="ion-text-center" lines="full">
+    <ion-button slot="end" color="dark" fill="clear" (click)="viewAsGrid()" >
+      <ion-icon slot="icon-only" name="grid-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button slot="start" color="dark" fill="clear" (click)="navigateToAddProductPage()">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      Add Product
+    </ion-button>
+  </ion-item>
+
   <ion-list *ngIf="displayMode === 2"> 
     <ion-item button *ngFor="let p of products" class="ProductContainer" lines="full" detail="false">
       
@@ -119,4 +139,5 @@
       
     </ion-item>
   </ion-list>
+
 </ion-content>
