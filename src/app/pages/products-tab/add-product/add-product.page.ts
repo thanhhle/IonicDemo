@@ -14,11 +14,11 @@ import { ProductCategory } from '../../../models/product-category.model'
 })
 export class AddProductPage implements OnInit
 {
-  productModel = ''
-  productName = ''
-  productImageURL = ''
-  productDescription = ''
-  productPrice = ''
+  productModel: string
+  productName: string
+  productImageURL: string
+  productDescription: string
+  productPrice: string
 
   imageUploaded: boolean
 
@@ -28,18 +28,18 @@ export class AddProductPage implements OnInit
   productCategoryDataService: ProductCategoryDataService
   productDataService: ProductDataService
 
-  //products: Product[]
-  //productDataService: ProductDataService
-  //cartDataService: CartDataService
-
   constructor(private router: Router, private alertController: AlertController, productCategoryDataService: ProductCategoryDataService, productDataService: ProductDataService)
   { 
     this.productCategoryDataService = productCategoryDataService
     this.productDataService = productDataService
-    
   }
 
   ngOnInit() {
+    this.productModel = ''
+    this.productName = ''
+    this.productImageURL = ''
+    this.productDescription = ''
+    this.productPrice = ''
     this.imageUploaded = false
     this.productCategories = this.getProductCategories()
   }

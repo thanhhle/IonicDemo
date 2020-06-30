@@ -4,9 +4,6 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 
 import { User } from '../models/user.model';
-import { BeautyTip } from '../models/beauty-tip.model';
-
-import { BeautyTipDataService } from './beauty-tip-data.service'
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +20,7 @@ export class UserDataService
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
+        role: user.role,
         createdDate: user.createdDate,
         lastSignInDate: user.lastSignInDate,
         lastActiveDate: user.lastActiveDate,
@@ -34,7 +32,7 @@ export class UserDataService
     fromFirestore(snapshot: firebase.firestore.QueryDocumentSnapshot, options: firebase.firestore.SnapshotOptions): User
     {
       const data = snapshot.data(options)!
-      return new User(data.uid, data.email, data.firstName, data.lastName, data.createdDate, data.lastSignInDate, data.lastActiveDate, data.beautyTipIDs)
+      return new User(data.uid, data.email, data.firstName, data.lastName, data.role, data.createdDate, data.lastSignInDate, data.lastActiveDate, data.beautyTipIDs)
     }
   }
 
@@ -119,4 +117,38 @@ export class UserDataService
    })
  }
 
+ getAllUsers(): User[]
+ {
+  let users: User[] = []
+  firebase.firestore().collection('users').withConverter(this.userConverter).get()
+    .then((querySnapshot) =>
+      { 
+        querySnapshot.forEach(element => {
+          console.log("element",element);
+        });
+      //   querySnapshot.forEach((doc) => 
+      //   {
+      //     users.unshift(doc.data())
+      //   })
+      //   console.log("in the then function:", users)
+      })
+      
+      console.log("outside the then functioo:", users)
+  return users
+ }
+
+ getUser(id: string): User
+ {
+   let users = this.getAllUsers()
+   var user: User
+   users.forEach(element => 
+    {
+      if(element.uid == id)
+      {
+        user = element
+      }
+   })
+   
+   return user
+  }
 }
