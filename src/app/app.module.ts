@@ -16,6 +16,9 @@ import * as firebase from 'firebase';
 
 import { environment } from '../environments/environment';
 
+import { NgxMaskIonicModule } from 'ngx-mask-ionic'
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,6 +26,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    NgxMaskIonicModule.forRoot(),
   ],
   providers: [
     StatusBar,

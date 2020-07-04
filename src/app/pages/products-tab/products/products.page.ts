@@ -17,6 +17,7 @@ import { User } from '../../../models/user.model'
 
 export class ProductsPage implements OnInit {
 
+  currentUser: User
   productCategory: string
   displayMode: number
 
@@ -39,7 +40,7 @@ export class ProductsPage implements OnInit {
     this.displayMode = 1
     this.productCategory = this.activatedRoute.snapshot.paramMap.get('id')
     this.products = this.getProducts() 
-    console.log(this.isCurrentUserAdmin())
+    this.currentUser = this.getCurrentUser()
   }
 
   getProducts(): Product[]
@@ -49,12 +50,22 @@ export class ProductsPage implements OnInit {
 
   getCurrentUser(): User
   {
-    return this.userDataService.getUser(this.authService.getCurrentUserID())
-  }
+    let user: User = new User("", "", "", "")
+    this.userDataService.getUser(this.authService.getCurrentUserID())
+      .then(res => 
+        {
+          user.uid = res.data().uid
+          user.email = res.data().email
+          user.lastName = res.data().lastName
+          user.firstName = res.data().firstName
+          user.role = res.data().role
+          user.createdDate = res.data().createdDate
+          user.lastActiveDate = res.data().lastActiveDate
+          user.lastSignInDate = res.data().lastSignInDate
+          user.beautyTipIDs = res.data().beautyTipIDs
+        })
 
-  isCurrentUserAdmin()
-  {
-    return this.getCurrentUser().role == 'admin'
+    return user
   }
 
   addToCart(product: Product)

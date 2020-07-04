@@ -117,38 +117,16 @@ export class UserDataService
    })
  }
 
- getAllUsers(): User[]
+ getUser(uid: string)
  {
-  let users: User[] = []
-  firebase.firestore().collection('users').withConverter(this.userConverter).get()
-    .then((querySnapshot) =>
-      { 
-        querySnapshot.forEach(element => {
-          console.log("element",element);
-        });
-      //   querySnapshot.forEach((doc) => 
-      //   {
-      //     users.unshift(doc.data())
-      //   })
-      //   console.log("in the then function:", users)
-      })
-      
-      console.log("outside the then functioo:", users)
-  return users
- }
-
- getUser(id: string): User
- {
-   let users = this.getAllUsers()
-   var user: User
-   users.forEach(element => 
-    {
-      if(element.uid == id)
-      {
-        user = element
-      }
+   return new Promise<any>((resolve, reject) => 
+   {
+     firebase.firestore().collection('users').withConverter(this.userConverter).doc(uid).get()
+       .then
+       (
+         res => resolve(res),
+         err => reject(err)
+       )
    })
-   
-   return user
-  }
+ }
 }

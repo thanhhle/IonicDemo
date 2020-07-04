@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="dark" text=""></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>Check Out</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Shipping Address</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label position="stacked">Full Name</ion-label>
+      <ion-input required type="text" [(ngModel)]='shippingName' name='shippingName'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Street Address or P.O. Box</ion-label>
+      <ion-input required type="text" [(ngModel)]='shippingStreetAddress1' name='shippingStreetAddress1'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Apt, Suite, Unit, Building (optional)</ion-label>
+      <ion-input required type="text" [(ngModel)]='shippingStreetAddress2' name='shippingStreetAddress2'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">City</ion-label>
+      <ion-input required type="text" [(ngModel)]='shippingCity' name='shippingCity'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">State</ion-label>
+      <ion-input required type="text" [(ngModel)]='shippingState' name='shippingState'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">ZIP Code</ion-label>
+      <ion-input required type="text" [(ngModel)]='shippingZIPCode' name='shippingZIPCode' mask='00000'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Phone Number</ion-label>
+      <ion-input required type="text" [(ngModel)]='shippingPhoneNum' name='shippingPhoneNum' mask='(000) 000-0000'></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Payment</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label position="stacked">Name On Card</ion-label>
+      <ion-input required type="text" [(ngModel)]='cardName' name='cardName'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Card Number</ion-label>
+      <ion-input required type="text" [(ngModel)]='cardNumber' name='cardNumber' mask='0000 0000 0000 0000'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Expiration Date (mm/yy)</ion-label>
+      <ion-input required type="text" [(ngModel)]='cardExpirationDate' name='cardExpirationDate'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Security Code</ion-label>
+      <ion-input required type="text" [(ngModel)]='cardSecurityCode' name='cardSecurityCode' mask='(000) 000-0000'></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-button class="placeOrderButton" color="dark" expand="block" shape="" fill="solid" (click)="placeOrder()">Place Order</ion-button>
+  
+
+</ion-content>

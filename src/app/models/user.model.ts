@@ -9,7 +9,7 @@ export class User {
     lastActiveDate: Date
     beautyTipIDs: string[]
 
-    constructor(uid: string, email: string, firstName: string, lastName: string, role?: string, createdDate?: Date, lastSignInDate?: Date, lastActiveDate?: Date, beautyTipIDs?: string[])
+    public constructor(uid: string, email: string, firstName: string, lastName: string, role?: string, createdDate?: Date, lastSignInDate?: Date, lastActiveDate?: Date, beautyTipIDs?: string[])
     {
         this.uid = uid
         this.email = email

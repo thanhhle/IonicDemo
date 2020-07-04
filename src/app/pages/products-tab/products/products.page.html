@@ -21,7 +21,7 @@
       <ion-icon slot="icon-only" name="tablet-portrait-outline"></ion-icon>
     </ion-button>
 
-    <ion-button slot="start" color="dark" fill="clear">
+    <ion-button slot="start" color="dark" fill="clear" *ngIf="currentUser.role == 'admin'" (click)="navigateToAddProductPage()">
       <ion-icon slot="start" name="add-outline"></ion-icon>
       Add Product
     </ion-button>
@@ -64,7 +64,7 @@
       <ion-icon slot="icon-only" name="list-outline"></ion-icon>
     </ion-button>
 
-    <ion-button slot="start" color="dark" fill="clear" (click)="navigateToAddProductPage()">
+    <ion-button slot="start" color="dark" fill="clear" *ngIf="currentUser.role == 'admin'" (click)="navigateToAddProductPage()">
       <ion-icon slot="start" name="add-outline"></ion-icon>
       Add Product
     </ion-button>
@@ -107,7 +107,7 @@
       <ion-icon slot="icon-only" name="grid-outline"></ion-icon>
     </ion-button>
 
-    <ion-button slot="start" color="dark" fill="clear" (click)="navigateToAddProductPage()">
+    <ion-button slot="start" color="dark" fill="clear" *ngIf="currentUser.role == 'admin'" (click)="navigateToAddProductPage()">
       <ion-icon slot="start" name="add-outline"></ion-icon>
       Add Product
     </ion-button>

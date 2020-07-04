@@ -4,6 +4,7 @@ import { CartDataService } from '../../../services/cart-data.service'
 import { Cart } from '../../../models/cart.model'
 import { Product } from '../../../models/product.model'
 import { Item } from '../../../models/item.model'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-cart',
@@ -16,7 +17,7 @@ export class MyCartPage implements OnInit {
   cart: Cart
   cartItems: Item[]
 
-  constructor(cartDataService: CartDataService)
+  constructor(private router: Router, cartDataService: CartDataService)
   { 
     this.cartDataService = cartDataService
     this.cart = this.cartDataService.getCart()
@@ -49,6 +50,11 @@ export class MyCartPage implements OnInit {
   getTotalPrice(): number
   {
     return this.cartDataService.getTotalPrice()
+  }
+
+  navigateToCheckOutPage()
+  {
+    this.router.navigate(['home/menu/my-cart/check-out'])
   }
 
 }

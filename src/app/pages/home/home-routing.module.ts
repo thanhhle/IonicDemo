@@ -71,7 +71,17 @@ const routes: Routes = [
           },
           {
             path: 'my-cart',
-            loadChildren: () => import('../me-tab/my-cart/my-cart.module').then( m => m.MyCartPageModule)
+            children:
+            [
+              {
+                path: '',
+                loadChildren: () => import('../me-tab/my-cart/my-cart.module').then( m => m.MyCartPageModule)
+              },
+              {
+                path: 'check-out',
+                loadChildren: () => import('../me-tab/check-out/check-out.module').then( m => m.CheckOutPageModule)
+              },
+            ]        
           },
         ]
       },

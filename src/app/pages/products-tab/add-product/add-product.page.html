@@ -19,7 +19,7 @@
   <ion-list lines="full" class="ion-no-margin ion-no-padding">
     <ion-item color="dark">
       <ion-label>Category</ion-label>
-      <ion-select color="dark" ok-text="Okay" cancel-text="Dismiss" [(ngModel)]='selectedCategory'>
+      <ion-select color="dark" [(ngModel)]='selectedCategory'>
         <ion-select-option *ngFor="let category of productCategories" [value]="category">{{ category.name | titlecase }}</ion-select-option>
       </ion-select>
     </ion-item>
