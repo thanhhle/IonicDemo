@@ -54,7 +54,10 @@ export class MyCartPage implements OnInit {
 
   navigateToCheckOutPage()
   {
-    this.router.navigate(['home/menu/my-cart/check-out'])
+    if(this.getItemCount() > 0)
+    {
+      this.router.navigate(['home/menu/my-cart/check-out'])
+    }
   }
 
 }

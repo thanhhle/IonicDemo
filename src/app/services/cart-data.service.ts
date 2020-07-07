@@ -31,12 +31,7 @@ export class CartDataService {
 
   getTotalPrice(): number
   {
-    let totalPrice = 0
-    for(let item of this.cart.items)
-    {
-      totalPrice += item.price
-    }
-    return totalPrice
+    return this.cart.totalPrice
   }
   
   addProduct(product: Product)

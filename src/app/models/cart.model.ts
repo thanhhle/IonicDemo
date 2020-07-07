@@ -1,5 +1,4 @@
 import { Item } from './item.model'
-import { BehaviorSubject } from 'rxjs'
 
 export class Cart {
     items: Item[]

@@ -9,6 +9,7 @@
 </ion-header>
 
 <ion-content fullscreen>
+
   <ion-list>
     <ion-list-header>
       <ion-label>Shipping Address</ion-label>
@@ -51,6 +52,117 @@
 
   </ion-list>
 
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Shipping Method</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let option of shippingOptions">
+      <ion-label>
+        <h3>{{ option.val }}</h3>
+        <p>{{ option.time }}</p>
+      </ion-label>
+      <ion-checkbox slot="start" color="dark" [(ngModel)]="option.checked" (click)="shippingOptionIsChecked(option)"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Order Summary</ion-label>
+    </ion-list-header>
+
+    <ion-item lines="inset">
+      <ion-grid>
+        <ion-row *ngFor="let item of cartItems">
+          <ion-col class="ion-align-self-center">
+            <div class="ion-text-left">
+              <ion-label>
+                <h3>{{ item.product.name }}</h3>
+                <p>x {{ item.quantity }}</p>
+              </ion-label>
+            </div>
+          </ion-col>
+  
+          <ion-col class="ion-align-self-center">
+            <div class="ion-text-right">
+              <p>{{ item.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</p>
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-left">
+              <P>Subtotal</P>
+            </div>
+          </ion-col>
+
+          <ion-col>
+            <div class="ion-text-right">
+              <P>{{ subtotal.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</P>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-left">
+              <P>Tax ({{tax}}%)</P>
+            </div>
+          </ion-col>
+
+          <ion-col>
+            <div>
+              <P class="ion-text-right">{{ (subtotal*tax/100).toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</P>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-left">
+              <P>Shipping fee</P>
+            </div>
+          </ion-col>
+
+          <ion-col>
+            <div class="ion-text-right">
+              <P>{{ shippingFee.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</P>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div class="ion-text-left">
+              <P>Total</P>
+            </div>
+          </ion-col>
+
+          <ion-col>
+            <div class="ion-text-right">
+              <P>{{ total.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}</P>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  
+  
+
   <ion-list>
     <ion-list-header>
       <ion-label>Payment</ion-label>
@@ -68,7 +180,7 @@
 
     <ion-item>
       <ion-label position="stacked">Expiration Date (mm/yy)</ion-label>
-      <ion-input required type="text" [(ngModel)]='cardExpirationDate' name='cardExpirationDate'></ion-input>
+      <ion-input required type="text" [(ngModel)]='cardExpirationDate' name='cardExpirationDate' mask='00/00'></ion-input>
     </ion-item>
 
     <ion-item>
@@ -78,7 +190,7 @@
 
   </ion-list>
 
-  <ion-button class="placeOrderButton" color="dark" expand="block" shape="" fill="solid" (click)="placeOrder()">Place Order</ion-button>
+  <ion-button class="placeOrderButton" color="dark" expand="block" shape="" fill="solid" (click)="print()">Place Order</ion-button>
   
 
 </ion-content>
